@@ -1,26 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
+import MapComponent from "./components/map/map";
+import FilmComponent from "./components/film/film";
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+  constructor() {
+    super();
+    this.state = {
+      films: []
+    }
+  }
+
+  componentDidMount() {}
+
+  render() {
+    return (
+      <div className="App">
+        <Router>
+          <div>
+            <ul>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/films">Films</Link>
+              </li>
+              <li>
+                <Link to={{
+                  pathname: "/map"                  
+                }}>Map</Link>
+              </li>
+            </ul>
+            <Route path="/films" component={FilmComponent} />
+            <Route path="/map" component={MapComponent} />
+          </div>
+        </Router>
+      </div>
+    );
+  }
 }
 
 export default App;
